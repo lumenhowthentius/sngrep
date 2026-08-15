@@ -645,8 +645,7 @@ sip_parse_msg_payload(sip_msg_t *msg, const u_char *payload)
         sng_strncpy(msg->sip_from, (const char *)payload +  pmatch[2].rm_so, (int)pmatch[2].rm_eo - pmatch[2].rm_so);
     } else {
         // Malformed From Header
-        msg->sip_from = sng_malloc(12);
-        sng_strlcpy(msg->sip_from, "<malformed>", 12);
+        msg->sip_from = strdup("<malformed>");
     }
 
     // To
@@ -655,8 +654,7 @@ sip_parse_msg_payload(sip_msg_t *msg, const u_char *payload)
         sng_strncpy(msg->sip_to, (const char *)payload +  pmatch[2].rm_so, (int)pmatch[2].rm_eo - pmatch[2].rm_so);
     } else {
         // Malformed To Header
-        msg->sip_to = sng_malloc(12);
-        sng_strlcpy(msg->sip_to, "<malformed>", 12);
+        msg->sip_to = strdup("<malformed>");
     }
 
     // Contact
