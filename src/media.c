@@ -62,7 +62,7 @@ media_destroyer(void *item)
 void
 media_set_type(sdp_media_t *media, const char *type)
 {
-    sng_strncpy(media->type, type, MEDIATYPELEN);
+    sng_strlcpy(media->type, type, MEDIATYPELEN);
 }
 
 void
@@ -86,7 +86,7 @@ media_add_format(sdp_media_t *media, uint32_t code, const char *format)
         return;
 
     fmt->id = code;
-    sng_strncpy(fmt->format, format, sizeof(fmt->format));
+    sng_strlcpy(fmt->format, format, sizeof(fmt->format));
     vector_append(media->formats, fmt);
 }
 

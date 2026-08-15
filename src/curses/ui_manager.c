@@ -666,7 +666,7 @@ dialog_confirm(const char *title, const char *text, const char *options)
     tofree = str = strdup((char*)options);
     i = 0;
     while (i < (sizeof(opts) / sizeof(opts[0])) && (option = strsep(&str, ",")) != NULL) {
-        sng_strncpy(opts[i], option, sizeof(opts[i]));
+        sng_strlcpy(opts[i], option, sizeof(opts[i]));
         i++;
     }
     free(tofree);

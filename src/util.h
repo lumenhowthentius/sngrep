@@ -51,11 +51,33 @@ sng_malloc(size_t size);
 char *
 sng_basename(const char *name);
 
-/*
- * @brief Wrapper for strncpy
+/**
+ * @brief Wrapper for strncpy that always null terminates
+ *
+ * Copies at most len characters from src and null terminates the
+ * result, so dst must be able to hold len + 1 characters.
+ *
+ * @param dst Destination buffer, of at least len + 1 characters
+ * @param src Source string
+ * @param len Number of characters to copy, not counting the null byte
+ * @return dst, or NULL if dst or src are NULL or len is zero
  */
 char *
 sng_strncpy(char *dst, const char *src, size_t len);
+
+/**
+ * @brief Copy a string into a fixed size buffer
+ *
+ * Copies at most size - 1 characters from src and null terminates the
+ * result, so the whole dst buffer is never overrun.
+ *
+ * @param dst Destination buffer
+ * @param src Source string
+ * @param size Size of the destination buffer, including the null byte
+ * @return dst, or NULL if dst or src are NULL or size is zero
+ */
+char *
+sng_strlcpy(char *dst, const char *src, size_t size);
 
 /**
  * @brief Compare two timeval structures

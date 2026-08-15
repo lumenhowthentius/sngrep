@@ -115,8 +115,18 @@ sng_strncpy(char *dst, const char *src, size_t len)
     if (dst == NULL || src == NULL || len == 0) {
         return NULL;
     }
-    strncpy(dst, src, len-1);
-    dst[len-1] = '\0';
+    strncpy(dst, src, len);
+    return dst;
+}
+
+char *
+sng_strlcpy(char *dst, const char *src, size_t size)
+{
+    if (dst == NULL || src == NULL || size == 0) {
+        return NULL;
+    }
+    strncpy(dst, src, size - 1);
+    dst[size - 1] = '\0';
     return dst;
 }
 

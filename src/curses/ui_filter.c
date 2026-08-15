@@ -222,7 +222,7 @@ filter_handle_key(ui_t *ui, int key)
     // Get current field value.
     // We trim spaces with sscanf because and empty field is stored as
     // space characters
-    sng_strncpy(field_value, field_buffer(current_field(info->form), 0), sizeof(field_value));
+    sng_strlcpy(field_value, field_buffer(current_field(info->form), 0), sizeof(field_value));
     strtrim(field_value);
 
     // Check actions for this key
@@ -351,7 +351,7 @@ filter_save_options(ui_t *ui)
         // We trim spaces with sscanf because and empty field is stored as
         // space characters
         memset(field_value, 0, sizeof(field_value));
-        sng_strncpy(field_value, field_buffer(info->fields[field_id], 0), sizeof(field_value));
+        sng_strlcpy(field_value, field_buffer(info->fields[field_id], 0), sizeof(field_value));
         strtrim(field_value);
 
         // Set filter expression
@@ -388,7 +388,7 @@ filter_save_options(ui_t *ui)
                     if (strlen(method_expr)) {
                         snprintf(method_expr + strlen(method_expr), sizeof(method_expr) - strlen(method_expr), ",%s", filter_field_method(field_id));
                     } else {
-                        sng_strncpy(method_expr, filter_field_method(field_id), sizeof(method_expr));
+                        sng_strlcpy(method_expr, filter_field_method(field_id), sizeof(method_expr));
                     }
                 }
                 break;
@@ -460,7 +460,7 @@ filter_method_from_setting(const char *value)
     // If there's a method filter
     if (methods_len) {
         // Copy value into temporal array
-        sng_strncpy(methods, value, sizeof(methods));
+        sng_strlcpy(methods, value, sizeof(methods));
 
         // Replace all commas with pippes
         while ((comma = strchr(methods, ',')))

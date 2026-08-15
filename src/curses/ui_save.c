@@ -237,7 +237,7 @@ save_draw(ui_t *ui)
     mvwprintw(ui->win, 9, 35, "( ) .txt");
 
     // Get filename field value.
-    sng_strncpy(field_value, field_buffer(info->fields[FLD_SAVE_FILE], 0), sizeof(field_value));
+    sng_strlcpy(field_value, field_buffer(info->fields[FLD_SAVE_FILE], 0), sizeof(field_value));
     strtrim(field_value);
 
     mvwprintw(ui->win, 4, 60, "     ");
@@ -430,13 +430,13 @@ save_to_file(ui_t *ui)
     save_info_t *info = save_info(ui);
 
     // Get current path field value.
-    sng_strncpy(savepath, field_buffer(info->fields[FLD_SAVE_PATH], 0), sizeof(savepath) - 1); // -1 because we can strcat a "/"
+    sng_strlcpy(savepath, field_buffer(info->fields[FLD_SAVE_PATH], 0), sizeof(savepath) - 1); // -1 because we can strcat a "/"
     strtrim(savepath);
     if (strlen(savepath))
         strcat(savepath, "/");
 
     // Get current file field value.
-    sng_strncpy(savefile, field_buffer(info->fields[FLD_SAVE_FILE], 0), sizeof(savefile));
+    sng_strlcpy(savefile, field_buffer(info->fields[FLD_SAVE_FILE], 0), sizeof(savefile));
     strtrim(savefile);
 
     if (!strlen(savefile)) {

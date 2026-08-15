@@ -112,10 +112,10 @@ address_from_str(const char *ipport)
     if (!ipport || strlen(ipport) > ADDRESSLEN + 6)
         return ret;
 
-    sng_strncpy(scanipport, ipport, sizeof(scanipport));
+    sng_strlcpy(scanipport, ipport, sizeof(scanipport));
 
     if (sscanf(scanipport, "%" STRINGIFY(ADDRESSLEN) "[^:]:%d", address, &port) == 2) {
-        sng_strncpy(ret.ip, address, sizeof(ret.ip));
+        sng_strlcpy(ret.ip, address, sizeof(ret.ip));
         ret.port = port;
     }
 
