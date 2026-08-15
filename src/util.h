@@ -52,14 +52,16 @@ char *
 sng_basename(const char *name);
 
 /**
- * @brief Wrapper for strncpy that always null terminates
+ * @brief Wrapper for strncpy that does not null terminate
  *
- * Copies at most len characters from src and null terminates the
- * result, so dst must be able to hold len + 1 characters.
+ * Copies at most len characters from src, zero padding dst when src is
+ * shorter. Nothing is written past dst[len - 1], so dst must already be
+ * zeroed for the result to be null terminated. Use sng_strlcpy() unless
+ * the caller controls the initial contents of dst.
  *
- * @param dst Destination buffer, of at least len + 1 characters
+ * @param dst Zeroed destination buffer, of at least len + 1 characters
  * @param src Source string
- * @param len Number of characters to copy, not counting the null byte
+ * @param len Number of characters to copy
  * @return dst, or NULL if dst or src are NULL or len is zero
  */
 char *
