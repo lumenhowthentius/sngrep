@@ -743,7 +743,7 @@ sip_parse_msg_media(sip_msg_t *msg, const u_char *payload)
 
         // Check if we have a connection string
         if (!strncmp(line, "c=", 2)) {
-            if (sscanf(line, "c=IN IP%*c %" STRINGIFY(ADDRESSLEN) "s", address)) {
+            if (sscanf(line, "c=IN IP%*c %" STRINGIFY(ADDRESSLEN) "s", address) == 1) {
                 sng_strlcpy(dst.ip, address, ADDRESSLEN);
                 if (media) {
                     media_set_address(media, dst);
@@ -755,7 +755,7 @@ sip_parse_msg_media(sip_msg_t *msg, const u_char *payload)
 
         // Check if we have attribute format string
         if (!strncmp(line, "a=rtpmap:", 9)) {
-            if (media && sscanf(line, "a=rtpmap:%u %29[^ ]", &media_fmt_code, media_format)) {
+            if (media && sscanf(line, "a=rtpmap:%u %29[^ ]", &media_fmt_code, media_format) == 2) {
                 media_add_format(media, media_fmt_code, media_format);
             }
         }
