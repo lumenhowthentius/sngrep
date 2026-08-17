@@ -784,6 +784,9 @@ sip_parse_extra_headers(sip_msg_t *msg, const u_char *payload)
     regmatch_t pmatch[4];
     char warning[MAX_WARNING_SIZE];
 
+    // Initialize variables
+    memset(warning, 0, sizeof(warning));
+
      // Reason text
      if (regexec(&calls.reg_reason, (const char *)payload, 2, pmatch, 0) == 0) {
          msg->call->reasontxt = sng_malloc((int)pmatch[1].rm_eo - pmatch[1].rm_so + 1);
